@@ -1,8 +1,20 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Amplify from "aws-amplify";
+import awsconfig from "./aws-exports";
+import { DataStore } from "@aws-amplify/datastore";
+import { Blog } from "./models";
 
+Amplify.configure(awsconfig);
 export default function Home() {
+
+  await DataStore.save(
+    new Blog({
+      name: "Lorem ipsum dolor sit amet",
+      posts: [],
+    })
+  );
   return (
     <div className={styles.container}>
       <Head>
